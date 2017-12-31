@@ -1,8 +1,9 @@
 import numpy
+from sklearn import preprocessing
 import pandas as pd
 from keras.datasets import mnist
 from keras.models import Sequential
-from keras.layers import Dense
+from keras.layers import Dense, Input
 from keras.layers import AlphaDropout
 from keras.layers import Flatten
 from keras.utils import np_utils, to_categorical
@@ -17,14 +18,10 @@ y=my_data[:,8]
 y = to_categorical(y)
 num_classes = 2
 
-def normalizeDataset(x):
-    x=x.astype('float32')
-    g = ImageDataGenerator(featurewise_center=True,featurewise_std_normalization=True)
-    g.fit(x)
-    return g.standardize(x)
 
-X_train = normalizeDataset(X_train)
-X_test = normalizeDataset(X_test)
+
+x = preprocessing.scale(x)
+
 
 
 model = Sequential()
@@ -37,7 +34,6 @@ Intent:
     inputs normalized to zero mean and unit variance, NOT SURE    
     
 '''
-model.add(Flatten(input_shape=(1, 28, 28)))
 model.add(Dense(512,activation='selu',kernel_initializer='lecun_normal'))
 model.add(AlphaDropout(0.05))
 model.add(Dense(256, activation='selu', kernel_initializer='lecun_normal'))
@@ -63,7 +59,7 @@ model.add(Dense(num_classes, activation='softmax'))
 # Compile model
 model.compile(loss='categorical_crossentropy', optimizer='Adam', metrics=['accuracy'])
 
-model.fit(X_train, y_train, validation_split=0.5, epochs=100, batch_size=100, verbose=1)
+model.fit(x, y, validation_split=0.3, epochs=100, batch_size=100, verbose=1, shuffle=True)
 # Final evaluation of the model
 scores = model.evaluate(X_test, y_test, verbose=0)
 print("Error: %.2f%%" % (100-scores[1]*100))
