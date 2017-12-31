@@ -17,12 +17,7 @@ y=my_data[:,8]
 
 y = to_categorical(y)
 num_classes = 2
-
-
-
 x = preprocessing.scale(x)
-
-
 
 model = Sequential()
 '''
@@ -46,7 +41,6 @@ model.add(Dense(32, activation='selu', kernel_initializer='lecun_normal'))
 model.add(AlphaDropout(0.05))
 model.add(Dense(16, activation='selu', kernel_initializer='lecun_normal'))
 model.add(AlphaDropout(0.05))
-
 model.add(Dense(8, activation='selu', kernel_initializer='lecun_normal', bias_initializer='lecun_normal'))
 model.add(AlphaDropout(0.05))
 model.add(Dense(4, activation='selu', kernel_initializer='lecun_normal', bias_initializer='lecun_normal'))
