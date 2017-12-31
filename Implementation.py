@@ -55,7 +55,7 @@ model.compile(loss='categorical_crossentropy', optimizer='Adam', metrics=['accur
 
 model.fit(x, y, validation_split=0.3, epochs=100, batch_size=100, verbose=1, shuffle=True)
 # Final evaluation of the model
-scores = model.evaluate(X_test, y_test, verbose=0)
+scores = model.evaluate(x, y, verbose=0)
 print("Error: %.2f%%" % (100-scores[1]*100))
 # Error: 1.89%
 
