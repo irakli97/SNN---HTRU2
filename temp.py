@@ -34,7 +34,7 @@ Intent:
     inputs normalized to zero mean and unit variance, NOT SURE    
     
 '''
-model.add(Dense(512,activation='selu',kernel_initializer='lecun_normal'))
+model.add(Dense(512,activation='selu',kernel_initializer='lecun_normal', input_shape=(8,)))
 model.add(AlphaDropout(0.05))
 model.add(Dense(256, activation='selu', kernel_initializer='lecun_normal'))
 model.add(AlphaDropout(0.05))
