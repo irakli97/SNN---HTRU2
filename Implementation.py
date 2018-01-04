@@ -23,10 +23,9 @@ model = Sequential()
 '''
 Intent:
     Conic layer form
-    8 hidden layers starting with 256 units. 
-    2^8 = 256
+    8 hidden layers starting with 512 units. 
     AlphaDropout with rate = 0.05
-    inputs normalized to zero mean and unit variance, NOT SURE    
+    inputs normalized to zero mean and unit variance   
     
 '''
 model.add(Dense(512,activation='selu',kernel_initializer='lecun_normal', input_shape=(8,)))
