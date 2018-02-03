@@ -57,4 +57,4 @@ model.fit(x, y, validation_split=0.3, epochs=10, batch_size=100, verbose=1, shuf
 # Final evaluation of the model
 scores = model.evaluate(x, y, verbose=0)
 print("Error: %.2f%%" % (100-scores[1]*100))
-# Error: 1.89%
+# Error: 2.03%
